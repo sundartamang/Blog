@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% load staticfiles %}
+{% block body %}
+    <!-- breadcrumb -->
+	<div class="container" style="margin-left:8rem !important">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				Logout
+			</span>
+		</div>
+	</div>
+    <main>
+        <div class="container mt-5 pt-5" style="min-height: 400px;">
+        <section class="mb-4">
+            <div class="row wow fadeIn">
+            <div class='col-6 offset-3'>
+                <h1 class="pb-3">{% trans "Sign Out" %}</h1>
+                <p class="pb-3">{% trans 'Are you sure you want to sign out?' %}</p>
+
+                <form method="post" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+                    <button class='btn btn-primary' type="submit">{% trans 'Sign Out' %}</button>
+                </form>
+            </div>
+            </div>
+        </section>
+        </div>
+    </main>
+{% endblock%}
